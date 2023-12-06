@@ -18,6 +18,7 @@ func main() {
 
 	scanner := bufio.NewScanner(f)
 	re := regexp.MustCompile("[0-9]")
+	totalSum := 0
 
 	for scanner.Scan() {
 		s := scanner.Text()
@@ -38,20 +39,20 @@ func main() {
 			}
 
 			sum := firstInt + lastInt
-			fmt.Printf("First: %d, Last: %d, Sum: %d\n", firstInt, lastInt, sum)
+			totalSum += sum
 		} else if len(digits) == 1 {
 			firstInt, err := strconv.Atoi(digits[0])
 			if err != nil {
 				log.Printf("Error: %v\n", err)
 				continue
 			}
-			fmt.Printf("First: %d, Sum: %d\n", firstInt, firstInt*2)
-		} else {
-			fmt.Println("No digits found")
+			totalSum += firstInt * 2
 		}
 	}
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
+
+	fmt.Printf("Total sum: %d\n", totalSum)
 }
