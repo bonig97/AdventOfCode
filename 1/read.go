@@ -30,29 +30,20 @@ func main() {
 		s := scanner.Text()
 		digits := re.FindAllString(s, -1)
 
+		var concat string
 		if len(digits) >= 2 {
-			firstDigit, lastDigit := digits[0], digits[len(digits)-1]
-
-			firstInt, err := strconv.Atoi(firstDigit)
-			if err != nil {
-				log.Printf("Error: %v\n", err)
-				continue
-			}
-			lastInt, err := strconv.Atoi(lastDigit)
-			if err != nil {
-				log.Printf("Error: %v\n", err)
-				continue
-			}
-
-			sum := firstInt + lastInt
-			totalSum += sum
+			concat = digits[0] + digits[len(digits)-1]
 		} else if len(digits) == 1 {
-			firstInt, err := strconv.Atoi(digits[0])
+			concat = digits[0] + digits[0]
+		}
+
+		if concat != "" {
+			concatInt, err := strconv.Atoi(concat)
 			if err != nil {
 				log.Printf("Error: %v\n", err)
 				continue
 			}
-			totalSum += firstInt * 2
+			totalSum += concatInt
 		}
 	}
 
